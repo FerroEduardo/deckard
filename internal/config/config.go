@@ -52,10 +52,8 @@ func Configure(reset ...bool) {
 
 	// Default configuration values
 	for _, config := range defaultConfigs {
-		viper.SetDefault(config.GetKey(), config.GetDefault())
-
 		for _, alias := range config.GetAliases() {
-			viper.SetDefault(alias, config.GetDefault())
+			viper.RegisterAlias(project.Name+alias, config.GetKey())
 		}
 	}
 
